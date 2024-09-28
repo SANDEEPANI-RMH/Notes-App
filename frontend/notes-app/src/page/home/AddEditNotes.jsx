@@ -10,7 +10,26 @@ const AddEditNotes = ({notData,type,onClose}) => {
     const [error, setError] = useState(null);
 
     // Add new note
-    const addNewNote=async()=>{}
+    const addNewNote=async()=>{
+      try{
+        const response = await axiosInstance.post("/add-note", {
+          title: title,
+          content: content,
+          tags: tags
+        });
+        if(response.data && response.data.error){
+          setError(response.data.message);
+          return;
+        }
+        onClose();
+      } catch(error){
+        if(error.response && error.response.data && error.response.data.message){
+          setError(error.response.data.message);
+        } else{
+          setError("Something went wrong. Please try again later");
+        }
+      }
+    }
 
     // Edit note
     const editNote=async()=>{}
