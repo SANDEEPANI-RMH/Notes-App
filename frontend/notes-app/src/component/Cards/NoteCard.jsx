@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import {MdOutlinePushPin} from 'react-icons/md'
 import {MdCreate, MdDelete} from 'react-icons/md'
+
 const NoteCard = ({
     title,
     date,

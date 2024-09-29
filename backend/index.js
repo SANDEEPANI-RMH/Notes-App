@@ -258,7 +258,8 @@ app.put('/update-isPinned/:noteId', authenticateToken, async (req, res) => {
             .json({error: true, message: 'Note not found'});
         }
 
-        if(isPinned) note.isPinned = isPinned ;
+        // if(isPinned) note.isPinned = isPinned ;
+        note.isPinned = isPinned; // Directly set the isPinned value
 
         await note.save();
 
@@ -273,6 +274,35 @@ app.put('/update-isPinned/:noteId', authenticateToken, async (req, res) => {
     }
 });
 
+//Search notes
+app.get('/search-notes/', authenticateToken, async (req, res) => {
+    const { query } = req.query;
+    const { user } = req.user;
+   
+    if(!query){
+        return res.status(400)
+        .json({error: true, message: 'Search Query is required'});
+    }
+    try{
+        const matchingNotes = await Note.find({
+            userId: user._id,
+            $or: [
+                {title: {$regex: new RegExp(query, 'i')}},
+                {content: {$regex: new RegExp(query, 'i')}},
+            ]
+        });
+
+        return res.json({
+            error: false,
+            notes: matchingNotes,
+            message: 'Notes fetched successfully',
+        });
+
+    }catch(error){
+        return res.status(500)
+        .json({error: true, message: 'Internal server error'});
+    }
+});
 app.listen(8005);
 
 module.exports = app;
