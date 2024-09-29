@@ -1,39 +1,85 @@
-import React from 'react'
-import ProfileInfo from './Cards/ProfileInfo'
+// import React from 'react'
+// import ProfileInfo from './Cards/ProfileInfo'
+// import { useNavigate } from 'react-router-dom';
+// import SearchBar from './SearchBar/SearchBar';
+// import { useState } from 'react';
+
+// const Navbar = ({userInfo, onSearchNote,handleClearSearch}) => {
+//   const [searchQuery, setSearchQuery] = useState("");
+  
+//   const navigate= useNavigate();
+//   const onLogout = () => {
+//     localStorage.clear();
+//     navigate("/login");
+//   }
+
+//   const handleSearch = () => {
+//     if(searchQuery){
+//     onSearchNote(searchQuery);
+//     }
+//   };
+//   const onClearSerach = () => {
+//     setSearchQuery("");
+//     handleClearSearch();
+//   };
+//   return (
+//     <div className="bg-white flex items-center justify-between px-6 py-2 drop-shadow">
+//       <h2 className="text-xl font-medium text-black py-2">Notes</h2>
+//       <SearchBar
+//       value={searchQuery}
+//       onChange={({target})=> setSearchQuery(target.value)}
+//       handleSearch={handleSearch}
+//       onClearSerach={onClearSerach}
+//       />
+//       <ProfileInfo userInfo={userInfo} onLogout={onLogout}/>
+//     </div>
+//   )
+// }
+
+// export default Navbar
+
+import React, { useState } from 'react';
+import ProfileInfo from './Cards/ProfileInfo';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar/SearchBar';
-import { useState } from 'react';
 
-const Navbar = ({userInfo, onSearchNote,handleClearSearch}) => {
-  const [searchQuery, setSearchQuery] = useState("");
+const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
+  const [searchQuery, setSearchQuery] = useState('');
   
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+  
   const onLogout = () => {
     localStorage.clear();
-    navigate("/login");
-  }
+    navigate('/login');
+  };
 
   const handleSearch = () => {
-    if(searchQuery){
-    onSearchNote(searchQuery);
+    if (searchQuery) {
+      onSearchNote(searchQuery);
     }
   };
-  const onClearSerach = () => {
-    setSearchQuery("");
+
+  const onClearSearch = () => {
+    setSearchQuery('');
     handleClearSearch();
   };
-  return (
-    <div className="bg-white flex items-center justify-between px-6 py-2 drop-shadow">
-      <h2 className="text-xl font-medium text-black py-2">Notes</h2>
-      <SearchBar
-      value={searchQuery}
-      onChange={({target})=> setSearchQuery(target.value)}
-      handleSearch={handleSearch}
-      onClearSerach={onClearSerach}
-      />
-      <ProfileInfo userInfo={userInfo} onLogout={onLogout}/>
-    </div>
-  )
-}
 
-export default Navbar
+  return (
+    <div className="bg-gradient-to-r from-indigo-600 to-purple-500 flex items-center justify-between px-6 py-4 shadow-md">
+      <h2 className="text-2xl font-semibold text-white">Notes</h2>
+
+      <div className="w-1/2">
+        <SearchBar
+          value={searchQuery}
+          onChange={({ target }) => setSearchQuery(target.value)}
+          handleSearch={handleSearch}
+          onClearSerach={onClearSearch}
+        />
+      </div>
+
+      <ProfileInfo userInfo={userInfo} onLogout={onLogout} />
+    </div>
+  );
+};
+
+export default Navbar;

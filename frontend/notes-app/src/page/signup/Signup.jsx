@@ -61,7 +61,7 @@ const Signup = () => {
   return (
    <>
    <Navbar/>
-    <div className="flex items-center justify-center mt-28">
+    <div className="flex items-center justify-center  min-h-screen bg-gradient-to-br from-indigo-300 to-purple-200">
        <div className="w-96 border rounded bg-white px-7 py-10">
         <form onSubmit={handleSignUp}>
             <h4 className="text-2xl mb-7">SignUp</h4>

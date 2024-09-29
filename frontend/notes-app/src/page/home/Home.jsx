@@ -149,7 +149,8 @@ const Home = () => {
   return (
    <>
    <Navbar userInfo={userInfo} onSearchNote={onSearchNote} handleClearSearch={handleClearSearch}/>
-   <div className='container mx-auto'>
+   
+   <div className='container mx-auto '>
    {notes.length>0? (
     <div className='grid grid-cols-3 gap-4 mt-8'>
      {notes.map((item, index)=>(
@@ -191,7 +192,7 @@ const Home = () => {
     },
    }}
    contentLabel=""
-   className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-scroll"    
+   className="w-[40%] max-h-3/4 mx-auto mt-14 p-5 "    
    >
    <AddEditNotes
    type={openAddEditNote.type}
@@ -213,6 +214,7 @@ const Home = () => {
       type={showToastMsg.type}
       onClose={handleCloseToast}
     />
+    
    </>
   );
 };
